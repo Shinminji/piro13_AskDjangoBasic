@@ -14,5 +14,5 @@ class Item(models.Model):
         return self.name
 
 
-class Post(models.Model):
-    author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+#class Post(models.Model):
+#    author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
