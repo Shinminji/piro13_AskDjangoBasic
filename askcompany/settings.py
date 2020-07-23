@@ -23,7 +23,7 @@ SECRET_KEY = 'prp1#**k+3^3ipg%j+non7gn(_8a*5s9k7&$l$505x(gfk)9$j'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 
-#디버그 모드 켜고 끄기
+# 디버그 모드 켜고 끄기
 DEBUG = True
 
 ALLOWED_HOSTS = []
@@ -40,6 +40,7 @@ INSTALLED_APPS = [
 
     'debug_toolbar',
     'django_extensions',
+    'django_jinja',
 
     'blog',
     'shop',
@@ -59,19 +60,35 @@ MIDDLEWARE = [
 ROOT_URLCONF = 'askcompany.urls'
 
 TEMPLATES = [
-    {
-        'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        #(두 개 이상의 앱에서 사용)프로젝트 전반적으로 사용할 템플릿은 DIRS에 명시한 경로에 배치
-        'DIRS': [
-            os.path.join(BASE_DIR, 'askcompany', 'templates'),
-        ],
+    {   #진자라는 확장자로 끝나면 진자를 백엔드 연결
+        'BACKEND': 'django_jinja.backend.Jinja2',
         'APP_DIRS': True,
         'OPTIONS': {
-            'context_processors': [
-                'django.template.context_processors.debug',
-                'django.template.context_processors.request',
-                'django.contrib.auth.context_processors.auth',
-                'django.contrib.messages.context_processors.messages',
+            "match_extension": ".jinja",
+            "context_processors": [
+                "django.contrib.auth.context_processors.auth",
+                "django.template.context_processors.debug",
+                "django.template.context_processors.i18n",
+                "django.template.context_processors.media",
+                "django.template.context_processors.static",
+                "django.template.context_processors.tz",
+                "django.contrib.messages.context_processors.messages",
+            ],
+        },
+    },
+    {
+        'BACKEND': 'django.template.backends.django.DjangoTemplates',
+        'DIRS': [
+              os.path.join(BASE_DIR, 'askcompany','templates')
+           ],
+        # (두 개 이상의 앱에서 사용)프로젝트 전반적으로 사용할 템플릿은 DIRS에 명시한 경로에 배치
+        'APP_DIRS':True,
+        'OPTIONS': {
+                'context_processors': [
+                    'django.template.context_processors.debug',
+                    'django.template.context_processors.request',
+                    'django.contrib.auth.context_processors.auth',
+                    'django.contrib.messages.context_processors.messages',
             ],
         },
     },
@@ -152,14 +169,14 @@ LOGGING = {
             'filename': 'db.log',
         },
     },
-    #로깅
+    # 로깅
     'loggers': {
         'django.db.backends': {
             'handlers': ['console', 'write_to_file'],
             'level': 'DEBUG',
         },
-        'shop':{
-            'handlers' : ['console'],
+        'shop': {
+            'handlers': ['console'],
             'level': 'DEBUG',
         },
     }

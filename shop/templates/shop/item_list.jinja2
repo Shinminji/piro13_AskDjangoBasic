@@ -1,0 +1,27 @@
+<!doctype html>
+<html>
+<head>
+    <title></title>
+</head>
+
+<body>
+<h1>Minji</h1>
+
+{{ user }}
+
+<form action="" method="GET">
+    <input type="text" name="q" value="{{ q }}" />
+    <input type="submit" value="search"/>
+
+</form>
+<ul>
+{% for item in item_list %}
+    <li>
+    {{ item.name }}
+    {{ item.price }}
+    {{ item.desc }}
+    </li>
+{% endfor %}
+</ul>
+</body>
+</html>
