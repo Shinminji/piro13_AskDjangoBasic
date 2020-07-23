@@ -22,6 +22,8 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'prp1#**k+3^3ipg%j+non7gn(_8a*5s9k7&$l$505x(gfk)9$j'
 
 # SECURITY WARNING: don't run with debug turned on in production!
+
+#디버그 모드 켜고 끄기
 DEBUG = True
 
 ALLOWED_HOSTS = []
@@ -59,7 +61,10 @@ ROOT_URLCONF = 'askcompany.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        #(두 개 이상의 앱에서 사용)프로젝트 전반적으로 사용할 템플릿은 DIRS에 명시한 경로에 배치
+        'DIRS': [
+            os.path.join(BASE_DIR, 'askcompany', 'templates'),
+        ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [

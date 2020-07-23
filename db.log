@@ -47,3 +47,12 @@
             WHERE type in ('table', 'view') AND NOT name='sqlite_sequence'
             ORDER BY name; args=None
 (0.001) SELECT "django_migrations"."app", "django_migrations"."name" FROM "django_migrations"; args=()
+(0.001) 
+            SELECT name, type FROM sqlite_master
+            WHERE type in ('table', 'view') AND NOT name='sqlite_sequence'
+            ORDER BY name; args=None
+(0.001) SELECT "django_migrations"."app", "django_migrations"."name" FROM "django_migrations"; args=()
+(0.002) SELECT "django_session"."session_key", "django_session"."session_data", "django_session"."expire_date" FROM "django_session" WHERE ("django_session"."expire_date" > '2020-07-23 02:11:33.793472' AND "django_session"."session_key" = '2wtb82xqwufytz9q8s90ynufo2tw394c'); args=('2020-07-23 02:11:33.793472', '2wtb82xqwufytz9q8s90ynufo2tw394c')
+(0.001) SELECT "django_session"."session_key", "django_session"."session_data", "django_session"."expire_date" FROM "django_session" WHERE ("django_session"."expire_date" > '2020-07-23 02:11:39.171217' AND "django_session"."session_key" = '2wtb82xqwufytz9q8s90ynufo2tw394c'); args=('2020-07-23 02:11:39.171217', '2wtb82xqwufytz9q8s90ynufo2tw394c')
+(0.001) SELECT "auth_user"."id", "auth_user"."password", "auth_user"."last_login", "auth_user"."is_superuser", "auth_user"."username", "auth_user"."first_name", "auth_user"."last_name", "auth_user"."email", "auth_user"."is_staff", "auth_user"."is_active", "auth_user"."date_joined" FROM "auth_user" WHERE "auth_user"."id" = 2; args=(2,)
+(0.001) SELECT "shop_item"."id", "shop_item"."name", "shop_item"."desc", "shop_item"."price", "shop_item"."is_publish", "shop_item"."created_at", "shop_item"."update_at" FROM "shop_item"; args=()
