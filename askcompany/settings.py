@@ -60,6 +60,7 @@ MIDDLEWARE = [
 ROOT_URLCONF = 'askcompany.urls'
 
 TEMPLATES = [
+    #진자
     {   #진자라는 확장자로 끝나면 진자를 백엔드 연결
         'BACKEND': 'django_jinja.backend.Jinja2',
         'APP_DIRS': True,
@@ -76,10 +77,11 @@ TEMPLATES = [
             ],
         },
     },
+    #장고 기본 템플릿
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [
-              os.path.join(BASE_DIR, 'askcompany','templates')
+              os.path.join(BASE_DIR, 'askcompany', 'templates')
            ],
         # (두 개 이상의 앱에서 사용)프로젝트 전반적으로 사용할 템플릿은 DIRS에 명시한 경로에 배치
         'APP_DIRS':True,
