@@ -629,3 +629,12 @@ DROP TABLE "shop_item__old"; (params ())
 (0.001) SELECT "shop_item"."id", "shop_item"."name", "shop_item"."desc", "shop_item"."price", "shop_item"."photo", "shop_item"."is_publish", "shop_item"."created_at", "shop_item"."update_at" FROM "shop_item" WHERE "shop_item"."id" = 2; args=(2,)
 (0.000) SELECT "django_session"."session_key", "django_session"."session_data", "django_session"."expire_date" FROM "django_session" WHERE ("django_session"."expire_date" > '2020-07-24 12:33:00.343113' AND "django_session"."session_key" = 'dptgkxmzf50ofy58yud8z6n57gkzos48'); args=('2020-07-24 12:33:00.343113', 'dptgkxmzf50ofy58yud8z6n57gkzos48')
 (0.000) SELECT "auth_user"."id", "auth_user"."password", "auth_user"."last_login", "auth_user"."is_superuser", "auth_user"."username", "auth_user"."first_name", "auth_user"."last_name", "auth_user"."email", "auth_user"."is_staff", "auth_user"."is_active", "auth_user"."date_joined" FROM "auth_user" WHERE "auth_user"."id" = 2; args=(2,)
+(0.001) 
+            SELECT name, type FROM sqlite_master
+            WHERE type in ('table', 'view') AND NOT name='sqlite_sequence'
+            ORDER BY name; args=None
+(0.000) SELECT "django_migrations"."app", "django_migrations"."name" FROM "django_migrations"; args=()
+(0.001) SELECT "django_session"."session_key", "django_session"."session_data", "django_session"."expire_date" FROM "django_session" WHERE ("django_session"."expire_date" > '2020-07-24 14:27:24.960187' AND "django_session"."session_key" = 'dptgkxmzf50ofy58yud8z6n57gkzos48'); args=('2020-07-24 14:27:24.960187', 'dptgkxmzf50ofy58yud8z6n57gkzos48')
+(0.001) SELECT "django_session"."session_key", "django_session"."session_data", "django_session"."expire_date" FROM "django_session" WHERE ("django_session"."expire_date" > '2020-07-24 14:27:34.061397' AND "django_session"."session_key" = 'dptgkxmzf50ofy58yud8z6n57gkzos48'); args=('2020-07-24 14:27:34.061397', 'dptgkxmzf50ofy58yud8z6n57gkzos48')
+(0.000) SELECT "auth_user"."id", "auth_user"."password", "auth_user"."last_login", "auth_user"."is_superuser", "auth_user"."username", "auth_user"."first_name", "auth_user"."last_name", "auth_user"."email", "auth_user"."is_staff", "auth_user"."is_active", "auth_user"."date_joined" FROM "auth_user" WHERE "auth_user"."id" = 2; args=(2,)
+(0.001) SELECT "shop_item"."id", "shop_item"."name", "shop_item"."desc", "shop_item"."price", "shop_item"."photo", "shop_item"."is_publish", "shop_item"."created_at", "shop_item"."update_at" FROM "shop_item"; args=()

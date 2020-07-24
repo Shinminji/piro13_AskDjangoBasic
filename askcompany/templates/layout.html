@@ -1,5 +1,5 @@
 <!--최상위-->
-{% load static %}
+{% load fresh_static %}
 <!doctype html>
 <html>
 <head>
@@ -10,7 +10,7 @@
         }
     </style>
 
-{% block extra_head %}<link rel="stylesheet" href="{% static "main.css" %}" />{% endblock %}
+{% block extra_head %}<link rel="stylesheet" href="{%fresh_static "main.css" %}" />{% endblock %}
 </head>
 
 <body>
@@ -24,7 +24,7 @@
     &copy; 2018. Ask Company.
 
 
-    {% block extra_body %} <script src="{% static "main.js" %}"></script>{% endblock %}
+    {% block extra_body %} <script src="{% fresh_static "main.js" %}"></script>{% endblock %}
 </body>
 
 </html>
