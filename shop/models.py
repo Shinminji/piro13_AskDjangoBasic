@@ -1,5 +1,6 @@
 from django.conf import settings
 from django.db import models
+from django.urls import reverse
 from askcompany.utils import uuid_upload_to
 
 
@@ -15,6 +16,9 @@ class Item(models.Model):
     def __str__(self):
         return self.name
 
+    def get_absolute_url(self):
+        #return reverse('shop:item_detail', args=[self.pk])
+        return reverse('shop:item_detail', kwargs={'pk':self.pk})
 
 #class Post(models.Model):
 #    author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)

@@ -25,7 +25,8 @@
         {% for item in item_list %}
             <li>
                 <!--url reverse 쓰는 게 더 맞음-->
-                <a href="/shop/{{ item.pk }}/">
+                <!--<a href="/shop/{{# item.pk #}}/">-->
+                    <a href="/shop/{{ item.get_absolute_url }}/">
                     {{ item.name }}
                 </a>
                 {{ item.price }}
