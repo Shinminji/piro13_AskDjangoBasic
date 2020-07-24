@@ -315,3 +315,317 @@
 (0.000) SELECT "shop_item"."id", "shop_item"."name", "shop_item"."desc", "shop_item"."price", "shop_item"."is_publish", "shop_item"."created_at", "shop_item"."update_at" FROM "shop_item"; args=()
 (0.000) SELECT "shop_item"."id", "shop_item"."name", "shop_item"."desc", "shop_item"."price", "shop_item"."is_publish", "shop_item"."created_at", "shop_item"."update_at" FROM "shop_item" WHERE "shop_item"."id" = 1; args=(1,)
 (0.001) SELECT "shop_item"."id", "shop_item"."name", "shop_item"."desc", "shop_item"."price", "shop_item"."is_publish", "shop_item"."created_at", "shop_item"."update_at" FROM "shop_item"; args=()
+(0.001) 
+            SELECT name, type FROM sqlite_master
+            WHERE type in ('table', 'view') AND NOT name='sqlite_sequence'
+            ORDER BY name; args=None
+(0.000) SELECT "django_migrations"."app", "django_migrations"."name" FROM "django_migrations"; args=()
+(0.000) 
+            SELECT name, type FROM sqlite_master
+            WHERE type in ('table', 'view') AND NOT name='sqlite_sequence'
+            ORDER BY name; args=None
+(0.000) SELECT "django_migrations"."app", "django_migrations"."name" FROM "django_migrations"; args=()
+(0.001) 
+            SELECT name, type FROM sqlite_master
+            WHERE type in ('table', 'view') AND NOT name='sqlite_sequence'
+            ORDER BY name; args=None
+(0.001) SELECT "django_migrations"."app", "django_migrations"."name" FROM "django_migrations"; args=()
+(0.001) 
+            SELECT name, type FROM sqlite_master
+            WHERE type in ('table', 'view') AND NOT name='sqlite_sequence'
+            ORDER BY name; args=None
+(0.000) SELECT "django_migrations"."app", "django_migrations"."name" FROM "django_migrations"; args=()
+(0.000) 
+            SELECT name, type FROM sqlite_master
+            WHERE type in ('table', 'view') AND NOT name='sqlite_sequence'
+            ORDER BY name; args=None
+(0.000) SELECT "django_migrations"."app", "django_migrations"."name" FROM "django_migrations"; args=()
+(0.001) 
+            SELECT name, type FROM sqlite_master
+            WHERE type in ('table', 'view') AND NOT name='sqlite_sequence'
+            ORDER BY name; args=None
+(0.000) PRAGMA foreign_keys = OFF; args=None
+(0.000) BEGIN; args=None
+CREATE TABLE "blog_comment" ("id" integer NOT NULL PRIMARY KEY AUTOINCREMENT, "message" text NOT NULL, "post_id" integer NOT NULL REFERENCES "blog_post" ("id") DEFERRABLE INITIALLY DEFERRED); (params None)
+(0.003) CREATE TABLE "blog_comment" ("id" integer NOT NULL PRIMARY KEY AUTOINCREMENT, "message" text NOT NULL, "post_id" integer NOT NULL REFERENCES "blog_post" ("id") DEFERRABLE INITIALLY DEFERRED); args=None
+CREATE INDEX "blog_comment_post_id_580e96ef" ON "blog_comment" ("post_id"); (params ())
+(0.001) CREATE INDEX "blog_comment_post_id_580e96ef" ON "blog_comment" ("post_id"); args=()
+(0.000) PRAGMA foreign_keys = ON; args=None
+(0.000) 
+            SELECT name, type FROM sqlite_master
+            WHERE type in ('table', 'view') AND NOT name='sqlite_sequence'
+            ORDER BY name; args=None
+(0.000) BEGIN; args=None
+(0.001) INSERT INTO "django_migrations" ("app", "name", "applied") VALUES ('blog', '0002_comment', '2020-07-24 12:08:12.984857'); args=['blog', '0002_comment', '2020-07-24 12:08:12.984857']
+(0.000) PRAGMA foreign_keys = OFF; args=None
+(0.000) BEGIN; args=None
+ALTER TABLE "blog_post" RENAME TO "blog_post__old"; (params ())
+(0.003) ALTER TABLE "blog_post" RENAME TO "blog_post__old"; args=()
+CREATE TABLE "blog_post" ("id" integer NOT NULL PRIMARY KEY AUTOINCREMENT, "title" varchar(100) NOT NULL, "content" text NOT NULL, "created_at" datetime NOT NULL, "update_at" datetime NOT NULL, "author_name" varchar(20) NOT NULL); (params None)
+(0.001) CREATE TABLE "blog_post" ("id" integer NOT NULL PRIMARY KEY AUTOINCREMENT, "title" varchar(100) NOT NULL, "content" text NOT NULL, "created_at" datetime NOT NULL, "update_at" datetime NOT NULL, "author_name" varchar(20) NOT NULL); args=None
+INSERT INTO "blog_post" ("id", "title", "content", "created_at", "update_at", "author_name") SELECT "id", "title", "content", "created_at", "update_at", 'anonymous' FROM "blog_post__old"; (params ())
+(0.001) INSERT INTO "blog_post" ("id", "title", "content", "created_at", "update_at", "author_name") SELECT "id", "title", "content", "created_at", "update_at", 'anonymous' FROM "blog_post__old"; args=()
+DROP TABLE "blog_post__old"; (params ())
+(0.001) DROP TABLE "blog_post__old"; args=()
+(0.000) PRAGMA foreign_keys = ON; args=None
+(0.000) 
+            SELECT name, type FROM sqlite_master
+            WHERE type in ('table', 'view') AND NOT name='sqlite_sequence'
+            ORDER BY name; args=None
+(0.000) BEGIN; args=None
+(0.001) INSERT INTO "django_migrations" ("app", "name", "applied") VALUES ('blog', '0003_post_author_name', '2020-07-24 12:08:13.005803'); args=['blog', '0003_post_author_name', '2020-07-24 12:08:13.005803']
+(0.000) PRAGMA foreign_keys = OFF; args=None
+(0.000) BEGIN; args=None
+ALTER TABLE "blog_comment" RENAME TO "blog_comment__old"; (params ())
+(0.003) ALTER TABLE "blog_comment" RENAME TO "blog_comment__old"; args=()
+CREATE TABLE "blog_comment" ("id" integer NOT NULL PRIMARY KEY AUTOINCREMENT, "message" text NOT NULL); (params None)
+(0.000) CREATE TABLE "blog_comment" ("id" integer NOT NULL PRIMARY KEY AUTOINCREMENT, "message" text NOT NULL); args=None
+INSERT INTO "blog_comment" ("id", "message") SELECT "id", "message" FROM "blog_comment__old"; (params ())
+(0.001) INSERT INTO "blog_comment" ("id", "message") SELECT "id", "message" FROM "blog_comment__old"; args=()
+DROP TABLE "blog_comment__old"; (params ())
+(0.000) DROP TABLE "blog_comment__old"; args=()
+ALTER TABLE "blog_post" RENAME TO "blog_post__old"; (params ())
+(0.002) ALTER TABLE "blog_post" RENAME TO "blog_post__old"; args=()
+CREATE TABLE "blog_post" ("id" integer NOT NULL PRIMARY KEY AUTOINCREMENT, "title" varchar(100) NOT NULL, "content" text NOT NULL, "created_at" datetime NOT NULL, "update_at" datetime NOT NULL, "author_name" varchar(20) NOT NULL, "author_id" integer NOT NULL REFERENCES "auth_user" ("id") DEFERRABLE INITIALLY DEFERRED); (params None)
+(0.000) CREATE TABLE "blog_post" ("id" integer NOT NULL PRIMARY KEY AUTOINCREMENT, "title" varchar(100) NOT NULL, "content" text NOT NULL, "created_at" datetime NOT NULL, "update_at" datetime NOT NULL, "author_name" varchar(20) NOT NULL, "author_id" integer NOT NULL REFERENCES "auth_user" ("id") DEFERRABLE INITIALLY DEFERRED); args=None
+INSERT INTO "blog_post" ("id", "title", "content", "created_at", "update_at", "author_name", "author_id") SELECT "id", "title", "content", "created_at", "update_at", "author_name", NULL FROM "blog_post__old"; (params ())
+(0.000) INSERT INTO "blog_post" ("id", "title", "content", "created_at", "update_at", "author_name", "author_id") SELECT "id", "title", "content", "created_at", "update_at", "author_name", NULL FROM "blog_post__old"; args=()
+DROP TABLE "blog_post__old"; (params ())
+(0.000) DROP TABLE "blog_post__old"; args=()
+CREATE INDEX "blog_post_author_id_dd7a8485" ON "blog_post" ("author_id"); (params ())
+(0.000) CREATE INDEX "blog_post_author_id_dd7a8485" ON "blog_post" ("author_id"); args=()
+ALTER TABLE "blog_post" RENAME TO "blog_post__old"; (params ())
+(0.001) ALTER TABLE "blog_post" RENAME TO "blog_post__old"; args=()
+CREATE TABLE "blog_post" ("id" integer NOT NULL PRIMARY KEY AUTOINCREMENT, "title" varchar(100) NOT NULL, "content" text NOT NULL, "created_at" datetime NOT NULL, "update_at" datetime NOT NULL, "author_name" varchar(20) NOT NULL, "author_id" integer NOT NULL REFERENCES "auth_user" ("id") DEFERRABLE INITIALLY DEFERRED, "photo" varchar(100) NOT NULL); (params None)
+(0.000) CREATE TABLE "blog_post" ("id" integer NOT NULL PRIMARY KEY AUTOINCREMENT, "title" varchar(100) NOT NULL, "content" text NOT NULL, "created_at" datetime NOT NULL, "update_at" datetime NOT NULL, "author_name" varchar(20) NOT NULL, "author_id" integer NOT NULL REFERENCES "auth_user" ("id") DEFERRABLE INITIALLY DEFERRED, "photo" varchar(100) NOT NULL); args=None
+INSERT INTO "blog_post" ("id", "title", "content", "created_at", "update_at", "author_name", "author_id", "photo") SELECT "id", "title", "content", "created_at", "update_at", "author_name", "author_id", '' FROM "blog_post__old"; (params ())
+(0.000) INSERT INTO "blog_post" ("id", "title", "content", "created_at", "update_at", "author_name", "author_id", "photo") SELECT "id", "title", "content", "created_at", "update_at", "author_name", "author_id", '' FROM "blog_post__old"; args=()
+DROP TABLE "blog_post__old"; (params ())
+(0.000) DROP TABLE "blog_post__old"; args=()
+CREATE INDEX "blog_post_author_id_dd7a8485" ON "blog_post" ("author_id"); (params ())
+(0.000) CREATE INDEX "blog_post_author_id_dd7a8485" ON "blog_post" ("author_id"); args=()
+(0.000) PRAGMA foreign_keys = ON; args=None
+(0.000) 
+            SELECT name, type FROM sqlite_master
+            WHERE type in ('table', 'view') AND NOT name='sqlite_sequence'
+            ORDER BY name; args=None
+(0.000) BEGIN; args=None
+(0.001) INSERT INTO "django_migrations" ("app", "name", "applied") VALUES ('blog', '0004_auto_20200724_2106', '2020-07-24 12:08:13.056665'); args=['blog', '0004_auto_20200724_2106', '2020-07-24 12:08:13.056665']
+(0.000) 
+            SELECT name, type FROM sqlite_master
+            WHERE type in ('table', 'view') AND NOT name='sqlite_sequence'
+            ORDER BY name; args=None
+(0.000) SELECT "django_migrations"."app", "django_migrations"."name" FROM "django_migrations"; args=()
+(0.000) SELECT "django_content_type"."id", "django_content_type"."app_label", "django_content_type"."model" FROM "django_content_type" WHERE ("django_content_type"."app_label" = 'admin' AND "django_content_type"."model" = 'logentry'); args=('admin', 'logentry')
+(0.000) SELECT "auth_permission"."content_type_id", "auth_permission"."codename" FROM "auth_permission" INNER JOIN "django_content_type" ON ("auth_permission"."content_type_id" = "django_content_type"."id") WHERE "auth_permission"."content_type_id" IN (1) ORDER BY "django_content_type"."app_label" ASC, "django_content_type"."model" ASC, "auth_permission"."codename" ASC; args=(1,)
+(0.000) SELECT "django_content_type"."id", "django_content_type"."app_label", "django_content_type"."model" FROM "django_content_type" WHERE "django_content_type"."app_label" = 'admin'; args=('admin',)
+(0.001) SELECT "django_content_type"."id", "django_content_type"."app_label", "django_content_type"."model" FROM "django_content_type" WHERE ("django_content_type"."app_label" = 'auth' AND "django_content_type"."model" = 'permission'); args=('auth', 'permission')
+(0.001) SELECT "django_content_type"."id", "django_content_type"."app_label", "django_content_type"."model" FROM "django_content_type" WHERE ("django_content_type"."app_label" = 'auth' AND "django_content_type"."model" = 'group'); args=('auth', 'group')
+(0.000) SELECT "django_content_type"."id", "django_content_type"."app_label", "django_content_type"."model" FROM "django_content_type" WHERE ("django_content_type"."app_label" = 'auth' AND "django_content_type"."model" = 'user'); args=('auth', 'user')
+(0.001) SELECT "auth_permission"."content_type_id", "auth_permission"."codename" FROM "auth_permission" INNER JOIN "django_content_type" ON ("auth_permission"."content_type_id" = "django_content_type"."id") WHERE "auth_permission"."content_type_id" IN (2, 3, 4) ORDER BY "django_content_type"."app_label" ASC, "django_content_type"."model" ASC, "auth_permission"."codename" ASC; args=(2, 3, 4)
+(0.000) SELECT "django_content_type"."id", "django_content_type"."app_label", "django_content_type"."model" FROM "django_content_type" WHERE "django_content_type"."app_label" = 'auth'; args=('auth',)
+(0.001) SELECT "django_content_type"."id", "django_content_type"."app_label", "django_content_type"."model" FROM "django_content_type" WHERE ("django_content_type"."app_label" = 'contenttypes' AND "django_content_type"."model" = 'contenttype'); args=('contenttypes', 'contenttype')
+(0.000) SELECT "auth_permission"."content_type_id", "auth_permission"."codename" FROM "auth_permission" INNER JOIN "django_content_type" ON ("auth_permission"."content_type_id" = "django_content_type"."id") WHERE "auth_permission"."content_type_id" IN (5) ORDER BY "django_content_type"."app_label" ASC, "django_content_type"."model" ASC, "auth_permission"."codename" ASC; args=(5,)
+(0.000) SELECT "django_content_type"."id", "django_content_type"."app_label", "django_content_type"."model" FROM "django_content_type" WHERE "django_content_type"."app_label" = 'contenttypes'; args=('contenttypes',)
+(0.000) SELECT "django_content_type"."id", "django_content_type"."app_label", "django_content_type"."model" FROM "django_content_type" WHERE ("django_content_type"."app_label" = 'sessions' AND "django_content_type"."model" = 'session'); args=('sessions', 'session')
+(0.000) SELECT "auth_permission"."content_type_id", "auth_permission"."codename" FROM "auth_permission" INNER JOIN "django_content_type" ON ("auth_permission"."content_type_id" = "django_content_type"."id") WHERE "auth_permission"."content_type_id" IN (6) ORDER BY "django_content_type"."app_label" ASC, "django_content_type"."model" ASC, "auth_permission"."codename" ASC; args=(6,)
+(0.000) SELECT "django_content_type"."id", "django_content_type"."app_label", "django_content_type"."model" FROM "django_content_type" WHERE "django_content_type"."app_label" = 'sessions'; args=('sessions',)
+(0.000) SELECT "django_content_type"."id", "django_content_type"."app_label", "django_content_type"."model" FROM "django_content_type" WHERE "django_content_type"."app_label" = 'django_extensions'; args=('django_extensions',)
+(0.000) SELECT "django_content_type"."id", "django_content_type"."app_label", "django_content_type"."model" FROM "django_content_type" WHERE "django_content_type"."app_label" = 'django_jinja'; args=('django_jinja',)
+(0.000) SELECT "django_content_type"."id", "django_content_type"."app_label", "django_content_type"."model" FROM "django_content_type" WHERE ("django_content_type"."app_label" = 'blog' AND "django_content_type"."model" = 'post'); args=('blog', 'post')
+(0.001) SELECT "django_content_type"."id", "django_content_type"."app_label", "django_content_type"."model" FROM "django_content_type" WHERE ("django_content_type"."app_label" = 'blog' AND "django_content_type"."model" = 'comment'); args=('blog', 'comment')
+(0.000) SELECT "django_content_type"."id", "django_content_type"."app_label", "django_content_type"."model" FROM "django_content_type" WHERE ("django_content_type"."app_label" = 'blog' AND "django_content_type"."model" = 'comment'); args=('blog', 'comment')
+(0.000) BEGIN; args=None
+(0.001) INSERT INTO "django_content_type" ("app_label", "model") VALUES ('blog', 'comment'); args=['blog', 'comment']
+(0.000) SELECT "auth_permission"."content_type_id", "auth_permission"."codename" FROM "auth_permission" INNER JOIN "django_content_type" ON ("auth_permission"."content_type_id" = "django_content_type"."id") WHERE "auth_permission"."content_type_id" IN (9, 7) ORDER BY "django_content_type"."app_label" ASC, "django_content_type"."model" ASC, "auth_permission"."codename" ASC; args=(9, 7)
+(0.000) BEGIN; args=None
+(0.002) INSERT INTO "auth_permission" ("name", "content_type_id", "codename") SELECT 'Can add comment', 9, 'add_comment' UNION ALL SELECT 'Can change comment', 9, 'change_comment' UNION ALL SELECT 'Can delete comment', 9, 'delete_comment' UNION ALL SELECT 'Can view comment', 9, 'view_comment'; args=('Can add comment', 9, 'add_comment', 'Can change comment', 9, 'change_comment', 'Can delete comment', 9, 'delete_comment', 'Can view comment', 9, 'view_comment')
+(0.001) SELECT "django_content_type"."id", "django_content_type"."app_label", "django_content_type"."model" FROM "django_content_type" WHERE "django_content_type"."app_label" = 'blog'; args=('blog',)
+(0.000) SELECT "django_content_type"."id", "django_content_type"."app_label", "django_content_type"."model" FROM "django_content_type" WHERE ("django_content_type"."app_label" = 'shop' AND "django_content_type"."model" = 'item'); args=('shop', 'item')
+(0.000) SELECT "auth_permission"."content_type_id", "auth_permission"."codename" FROM "auth_permission" INNER JOIN "django_content_type" ON ("auth_permission"."content_type_id" = "django_content_type"."id") WHERE "auth_permission"."content_type_id" IN (8) ORDER BY "django_content_type"."app_label" ASC, "django_content_type"."model" ASC, "auth_permission"."codename" ASC; args=(8,)
+(0.001) SELECT "django_content_type"."id", "django_content_type"."app_label", "django_content_type"."model" FROM "django_content_type" WHERE "django_content_type"."app_label" = 'shop'; args=('shop',)
+(0.001) 
+            SELECT name, type FROM sqlite_master
+            WHERE type in ('table', 'view') AND NOT name='sqlite_sequence'
+            ORDER BY name; args=None
+(0.001) SELECT "django_migrations"."app", "django_migrations"."name" FROM "django_migrations"; args=()
+(0.000) 
+            SELECT name, type FROM sqlite_master
+            WHERE type in ('table', 'view') AND NOT name='sqlite_sequence'
+            ORDER BY name; args=None
+(0.000) SELECT "django_migrations"."app", "django_migrations"."name" FROM "django_migrations"; args=()
+(0.001) 
+            SELECT name, type FROM sqlite_master
+            WHERE type in ('table', 'view') AND NOT name='sqlite_sequence'
+            ORDER BY name; args=None
+(0.000) PRAGMA foreign_keys = OFF; args=None
+(0.000) BEGIN; args=None
+ALTER TABLE "shop_item" RENAME TO "shop_item__old"; (params ())
+(0.010) ALTER TABLE "shop_item" RENAME TO "shop_item__old"; args=()
+CREATE TABLE "shop_item" ("id" integer NOT NULL PRIMARY KEY AUTOINCREMENT, "name" varchar(100) NOT NULL, "desc" text NOT NULL, "price" integer unsigned NOT NULL, "created_at" datetime NOT NULL, "update_at" datetime NOT NULL, "is_publish" bool NOT NULL, "photo" varchar(100) NOT NULL); (params None)
+(0.000) CREATE TABLE "shop_item" ("id" integer NOT NULL PRIMARY KEY AUTOINCREMENT, "name" varchar(100) NOT NULL, "desc" text NOT NULL, "price" integer unsigned NOT NULL, "created_at" datetime NOT NULL, "update_at" datetime NOT NULL, "is_publish" bool NOT NULL, "photo" varchar(100) NOT NULL); args=None
+INSERT INTO "shop_item" ("id", "name", "desc", "price", "created_at", "update_at", "is_publish", "photo") SELECT "id", "name", "desc", "price", "created_at", "update_at", "is_publish", '' FROM "shop_item__old"; (params ())
+(0.000) INSERT INTO "shop_item" ("id", "name", "desc", "price", "created_at", "update_at", "is_publish", "photo") SELECT "id", "name", "desc", "price", "created_at", "update_at", "is_publish", '' FROM "shop_item__old"; args=()
+DROP TABLE "shop_item__old"; (params ())
+(0.000) DROP TABLE "shop_item__old"; args=()
+(0.000) PRAGMA foreign_keys = ON; args=None
+(0.000) 
+            SELECT name, type FROM sqlite_master
+            WHERE type in ('table', 'view') AND NOT name='sqlite_sequence'
+            ORDER BY name; args=None
+(0.000) BEGIN; args=None
+(0.001) INSERT INTO "django_migrations" ("app", "name", "applied") VALUES ('shop', '0003_item_photo', '2020-07-24 12:08:18.545387'); args=['shop', '0003_item_photo', '2020-07-24 12:08:18.545387']
+(0.000) 
+            SELECT name, type FROM sqlite_master
+            WHERE type in ('table', 'view') AND NOT name='sqlite_sequence'
+            ORDER BY name; args=None
+(0.000) SELECT "django_migrations"."app", "django_migrations"."name" FROM "django_migrations"; args=()
+(0.001) SELECT "django_content_type"."id", "django_content_type"."app_label", "django_content_type"."model" FROM "django_content_type" WHERE ("django_content_type"."app_label" = 'admin' AND "django_content_type"."model" = 'logentry'); args=('admin', 'logentry')
+(0.001) SELECT "auth_permission"."content_type_id", "auth_permission"."codename" FROM "auth_permission" INNER JOIN "django_content_type" ON ("auth_permission"."content_type_id" = "django_content_type"."id") WHERE "auth_permission"."content_type_id" IN (1) ORDER BY "django_content_type"."app_label" ASC, "django_content_type"."model" ASC, "auth_permission"."codename" ASC; args=(1,)
+(0.000) SELECT "django_content_type"."id", "django_content_type"."app_label", "django_content_type"."model" FROM "django_content_type" WHERE "django_content_type"."app_label" = 'admin'; args=('admin',)
+(0.000) SELECT "django_content_type"."id", "django_content_type"."app_label", "django_content_type"."model" FROM "django_content_type" WHERE ("django_content_type"."app_label" = 'auth' AND "django_content_type"."model" = 'permission'); args=('auth', 'permission')
+(0.000) SELECT "django_content_type"."id", "django_content_type"."app_label", "django_content_type"."model" FROM "django_content_type" WHERE ("django_content_type"."app_label" = 'auth' AND "django_content_type"."model" = 'group'); args=('auth', 'group')
+(0.000) SELECT "django_content_type"."id", "django_content_type"."app_label", "django_content_type"."model" FROM "django_content_type" WHERE ("django_content_type"."app_label" = 'auth' AND "django_content_type"."model" = 'user'); args=('auth', 'user')
+(0.000) SELECT "auth_permission"."content_type_id", "auth_permission"."codename" FROM "auth_permission" INNER JOIN "django_content_type" ON ("auth_permission"."content_type_id" = "django_content_type"."id") WHERE "auth_permission"."content_type_id" IN (2, 3, 4) ORDER BY "django_content_type"."app_label" ASC, "django_content_type"."model" ASC, "auth_permission"."codename" ASC; args=(2, 3, 4)
+(0.000) SELECT "django_content_type"."id", "django_content_type"."app_label", "django_content_type"."model" FROM "django_content_type" WHERE "django_content_type"."app_label" = 'auth'; args=('auth',)
+(0.000) SELECT "django_content_type"."id", "django_content_type"."app_label", "django_content_type"."model" FROM "django_content_type" WHERE ("django_content_type"."app_label" = 'contenttypes' AND "django_content_type"."model" = 'contenttype'); args=('contenttypes', 'contenttype')
+(0.001) SELECT "auth_permission"."content_type_id", "auth_permission"."codename" FROM "auth_permission" INNER JOIN "django_content_type" ON ("auth_permission"."content_type_id" = "django_content_type"."id") WHERE "auth_permission"."content_type_id" IN (5) ORDER BY "django_content_type"."app_label" ASC, "django_content_type"."model" ASC, "auth_permission"."codename" ASC; args=(5,)
+(0.000) SELECT "django_content_type"."id", "django_content_type"."app_label", "django_content_type"."model" FROM "django_content_type" WHERE "django_content_type"."app_label" = 'contenttypes'; args=('contenttypes',)
+(0.000) SELECT "django_content_type"."id", "django_content_type"."app_label", "django_content_type"."model" FROM "django_content_type" WHERE ("django_content_type"."app_label" = 'sessions' AND "django_content_type"."model" = 'session'); args=('sessions', 'session')
+(0.001) SELECT "auth_permission"."content_type_id", "auth_permission"."codename" FROM "auth_permission" INNER JOIN "django_content_type" ON ("auth_permission"."content_type_id" = "django_content_type"."id") WHERE "auth_permission"."content_type_id" IN (6) ORDER BY "django_content_type"."app_label" ASC, "django_content_type"."model" ASC, "auth_permission"."codename" ASC; args=(6,)
+(0.000) SELECT "django_content_type"."id", "django_content_type"."app_label", "django_content_type"."model" FROM "django_content_type" WHERE "django_content_type"."app_label" = 'sessions'; args=('sessions',)
+(0.000) SELECT "django_content_type"."id", "django_content_type"."app_label", "django_content_type"."model" FROM "django_content_type" WHERE "django_content_type"."app_label" = 'django_extensions'; args=('django_extensions',)
+(0.000) SELECT "django_content_type"."id", "django_content_type"."app_label", "django_content_type"."model" FROM "django_content_type" WHERE "django_content_type"."app_label" = 'django_jinja'; args=('django_jinja',)
+(0.000) SELECT "django_content_type"."id", "django_content_type"."app_label", "django_content_type"."model" FROM "django_content_type" WHERE ("django_content_type"."app_label" = 'blog' AND "django_content_type"."model" = 'post'); args=('blog', 'post')
+(0.000) SELECT "django_content_type"."id", "django_content_type"."app_label", "django_content_type"."model" FROM "django_content_type" WHERE ("django_content_type"."app_label" = 'blog' AND "django_content_type"."model" = 'comment'); args=('blog', 'comment')
+(0.000) SELECT "auth_permission"."content_type_id", "auth_permission"."codename" FROM "auth_permission" INNER JOIN "django_content_type" ON ("auth_permission"."content_type_id" = "django_content_type"."id") WHERE "auth_permission"."content_type_id" IN (9, 7) ORDER BY "django_content_type"."app_label" ASC, "django_content_type"."model" ASC, "auth_permission"."codename" ASC; args=(9, 7)
+(0.000) SELECT "django_content_type"."id", "django_content_type"."app_label", "django_content_type"."model" FROM "django_content_type" WHERE "django_content_type"."app_label" = 'blog'; args=('blog',)
+(0.000) SELECT "django_content_type"."id", "django_content_type"."app_label", "django_content_type"."model" FROM "django_content_type" WHERE ("django_content_type"."app_label" = 'shop' AND "django_content_type"."model" = 'item'); args=('shop', 'item')
+(0.000) SELECT "auth_permission"."content_type_id", "auth_permission"."codename" FROM "auth_permission" INNER JOIN "django_content_type" ON ("auth_permission"."content_type_id" = "django_content_type"."id") WHERE "auth_permission"."content_type_id" IN (8) ORDER BY "django_content_type"."app_label" ASC, "django_content_type"."model" ASC, "auth_permission"."codename" ASC; args=(8,)
+(0.001) SELECT "django_content_type"."id", "django_content_type"."app_label", "django_content_type"."model" FROM "django_content_type" WHERE "django_content_type"."app_label" = 'shop'; args=('shop',)
+(0.000) 
+            SELECT name, type FROM sqlite_master
+            WHERE type in ('table', 'view') AND NOT name='sqlite_sequence'
+            ORDER BY name; args=None
+(0.000) SELECT "django_migrations"."app", "django_migrations"."name" FROM "django_migrations"; args=()
+(0.001) SELECT "auth_user"."id", "auth_user"."password", "auth_user"."last_login", "auth_user"."is_superuser", "auth_user"."username", "auth_user"."first_name", "auth_user"."last_name", "auth_user"."email", "auth_user"."is_staff", "auth_user"."is_active", "auth_user"."date_joined" FROM "auth_user" WHERE "auth_user"."username" = 'Shinminji'; args=('Shinminji',)
+(0.002) SELECT "auth_user"."id", "auth_user"."password", "auth_user"."last_login", "auth_user"."is_superuser", "auth_user"."username", "auth_user"."first_name", "auth_user"."last_name", "auth_user"."email", "auth_user"."is_staff", "auth_user"."is_active", "auth_user"."date_joined" FROM "auth_user" WHERE "auth_user"."username" = 'minji'; args=('minji',)
+(0.000) SELECT (1) AS "a" FROM "django_session" WHERE "django_session"."session_key" = 'dptgkxmzf50ofy58yud8z6n57gkzos48'  LIMIT 1; args=('dptgkxmzf50ofy58yud8z6n57gkzos48',)
+(0.000) BEGIN; args=None
+(0.002) INSERT INTO "django_session" ("session_key", "session_data", "expire_date") SELECT 'dptgkxmzf50ofy58yud8z6n57gkzos48', 'ZDVkZWY1MTI5ZTVjODExMmUyMjFlNzQ1MGI3Y2YxZjRmNWU3OGQyYjp7fQ==', '2020-08-07 12:09:37.744965'; args=('dptgkxmzf50ofy58yud8z6n57gkzos48', 'ZDVkZWY1MTI5ZTVjODExMmUyMjFlNzQ1MGI3Y2YxZjRmNWU3OGQyYjp7fQ==', '2020-08-07 12:09:37.744965')
+(0.000) BEGIN; args=None
+(0.001) UPDATE "auth_user" SET "last_login" = '2020-07-24 12:09:37.822719' WHERE "auth_user"."id" = 2; args=('2020-07-24 12:09:37.822719', 2)
+(0.000) BEGIN; args=None
+(0.001) UPDATE "django_session" SET "session_data" = 'MWYxY2UwYmExZmU3MTVkMmJhNDYxZTk4MDgyNmMxMTJjNzVkMGUxNjp7Il9hdXRoX3VzZXJfaWQiOiIyIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiIzNDQyOTM2NWY3NDFjNDQwNzRmZWY4MjkxMGMyODU3Mzk3ZjQ5NDQ5In0=', "expire_date" = '2020-08-07 12:09:37.894569' WHERE "django_session"."session_key" = 'dptgkxmzf50ofy58yud8z6n57gkzos48'; args=('MWYxY2UwYmExZmU3MTVkMmJhNDYxZTk4MDgyNmMxMTJjNzVkMGUxNjp7Il9hdXRoX3VzZXJfaWQiOiIyIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiIzNDQyOTM2NWY3NDFjNDQwNzRmZWY4MjkxMGMyODU3Mzk3ZjQ5NDQ5In0=', '2020-08-07 12:09:37.894569', 'dptgkxmzf50ofy58yud8z6n57gkzos48')
+(0.000) SELECT "django_session"."session_key", "django_session"."session_data", "django_session"."expire_date" FROM "django_session" WHERE ("django_session"."expire_date" > '2020-07-24 12:09:37.945391' AND "django_session"."session_key" = 'dptgkxmzf50ofy58yud8z6n57gkzos48'); args=('2020-07-24 12:09:37.945391', 'dptgkxmzf50ofy58yud8z6n57gkzos48')
+(0.001) SELECT "auth_user"."id", "auth_user"."password", "auth_user"."last_login", "auth_user"."is_superuser", "auth_user"."username", "auth_user"."first_name", "auth_user"."last_name", "auth_user"."email", "auth_user"."is_staff", "auth_user"."is_active", "auth_user"."date_joined" FROM "auth_user" WHERE "auth_user"."id" = 2; args=(2,)
+(0.000) SELECT COUNT(*) AS "__count" FROM "shop_item"; args=()
+(0.000) SELECT COUNT(*) AS "__count" FROM "shop_item"; args=()
+(0.000) SELECT "shop_item"."id", "shop_item"."name", "shop_item"."desc", "shop_item"."price", "shop_item"."photo", "shop_item"."is_publish", "shop_item"."created_at", "shop_item"."update_at" FROM "shop_item" ORDER BY "shop_item"."id" DESC; args=()
+(0.003) SELECT "django_session"."session_key", "django_session"."session_data", "django_session"."expire_date" FROM "django_session" WHERE ("django_session"."expire_date" > '2020-07-24 12:09:38.287477' AND "django_session"."session_key" = 'dptgkxmzf50ofy58yud8z6n57gkzos48'); args=('2020-07-24 12:09:38.287477', 'dptgkxmzf50ofy58yud8z6n57gkzos48')
+(0.000) SELECT "auth_user"."id", "auth_user"."password", "auth_user"."last_login", "auth_user"."is_superuser", "auth_user"."username", "auth_user"."first_name", "auth_user"."last_name", "auth_user"."email", "auth_user"."is_staff", "auth_user"."is_active", "auth_user"."date_joined" FROM "auth_user" WHERE "auth_user"."id" = 2; args=(2,)
+(0.001) SELECT "django_session"."session_key", "django_session"."session_data", "django_session"."expire_date" FROM "django_session" WHERE ("django_session"."expire_date" > '2020-07-24 12:09:45.682600' AND "django_session"."session_key" = 'dptgkxmzf50ofy58yud8z6n57gkzos48'); args=('2020-07-24 12:09:45.682600', 'dptgkxmzf50ofy58yud8z6n57gkzos48')
+(0.000) SELECT "auth_user"."id", "auth_user"."password", "auth_user"."last_login", "auth_user"."is_superuser", "auth_user"."username", "auth_user"."first_name", "auth_user"."last_name", "auth_user"."email", "auth_user"."is_staff", "auth_user"."is_active", "auth_user"."date_joined" FROM "auth_user" WHERE "auth_user"."id" = 2; args=(2,)
+(0.000) BEGIN; args=None
+(0.000) SELECT "django_content_type"."id", "django_content_type"."app_label", "django_content_type"."model" FROM "django_content_type" WHERE ("django_content_type"."app_label" = 'shop' AND "django_content_type"."model" = 'item'); args=('shop', 'item')
+(0.000) SELECT "django_session"."session_key", "django_session"."session_data", "django_session"."expire_date" FROM "django_session" WHERE ("django_session"."expire_date" > '2020-07-24 12:09:45.949888' AND "django_session"."session_key" = 'dptgkxmzf50ofy58yud8z6n57gkzos48'); args=('2020-07-24 12:09:45.949888', 'dptgkxmzf50ofy58yud8z6n57gkzos48')
+(0.000) SELECT "auth_user"."id", "auth_user"."password", "auth_user"."last_login", "auth_user"."is_superuser", "auth_user"."username", "auth_user"."first_name", "auth_user"."last_name", "auth_user"."email", "auth_user"."is_staff", "auth_user"."is_active", "auth_user"."date_joined" FROM "auth_user" WHERE "auth_user"."id" = 2; args=(2,)
+(0.001) SELECT "django_session"."session_key", "django_session"."session_data", "django_session"."expire_date" FROM "django_session" WHERE ("django_session"."expire_date" > '2020-07-24 12:10:20.007523' AND "django_session"."session_key" = 'dptgkxmzf50ofy58yud8z6n57gkzos48'); args=('2020-07-24 12:10:20.007523', 'dptgkxmzf50ofy58yud8z6n57gkzos48')
+(0.000) SELECT "auth_user"."id", "auth_user"."password", "auth_user"."last_login", "auth_user"."is_superuser", "auth_user"."username", "auth_user"."first_name", "auth_user"."last_name", "auth_user"."email", "auth_user"."is_staff", "auth_user"."is_active", "auth_user"."date_joined" FROM "auth_user" WHERE "auth_user"."id" = 2; args=(2,)
+(0.000) BEGIN; args=None
+(0.008) INSERT INTO "shop_item" ("name", "desc", "price", "photo", "is_publish", "created_at", "update_at") VALUES ('Æ÷´¢', 'Æ÷´¢', 0, 'after.png', 1, '2020-07-24 12:10:20.226945', '2020-07-24 12:10:20.226945'); args=['Æ÷´¢', 'Æ÷´¢', 0, 'after.png', True, '2020-07-24 12:10:20.226945', '2020-07-24 12:10:20.226945']
+(0.000) INSERT INTO "django_admin_log" ("action_time", "user_id", "content_type_id", "object_id", "object_repr", "action_flag", "change_message") VALUES ('2020-07-24 12:10:20.264867', 2, 8, '2', 'Æ÷´¢', 1, '[{"added": {}}]'); args=['2020-07-24 12:10:20.264867', 2, 8, '2', 'Æ÷´¢', 1, '[{"added": {}}]']
+(0.000) SELECT "django_session"."session_key", "django_session"."session_data", "django_session"."expire_date" FROM "django_session" WHERE ("django_session"."expire_date" > '2020-07-24 12:10:20.308746' AND "django_session"."session_key" = 'dptgkxmzf50ofy58yud8z6n57gkzos48'); args=('2020-07-24 12:10:20.308746', 'dptgkxmzf50ofy58yud8z6n57gkzos48')
+(0.001) SELECT "auth_user"."id", "auth_user"."password", "auth_user"."last_login", "auth_user"."is_superuser", "auth_user"."username", "auth_user"."first_name", "auth_user"."last_name", "auth_user"."email", "auth_user"."is_staff", "auth_user"."is_active", "auth_user"."date_joined" FROM "auth_user" WHERE "auth_user"."id" = 2; args=(2,)
+(0.001) SELECT COUNT(*) AS "__count" FROM "shop_item"; args=()
+(0.000) SELECT COUNT(*) AS "__count" FROM "shop_item"; args=()
+(0.000) SELECT "shop_item"."id", "shop_item"."name", "shop_item"."desc", "shop_item"."price", "shop_item"."photo", "shop_item"."is_publish", "shop_item"."created_at", "shop_item"."update_at" FROM "shop_item" ORDER BY "shop_item"."id" DESC; args=()
+(0.001) SELECT "django_session"."session_key", "django_session"."session_data", "django_session"."expire_date" FROM "django_session" WHERE ("django_session"."expire_date" > '2020-07-24 12:10:20.614910' AND "django_session"."session_key" = 'dptgkxmzf50ofy58yud8z6n57gkzos48'); args=('2020-07-24 12:10:20.614910', 'dptgkxmzf50ofy58yud8z6n57gkzos48')
+(0.001) SELECT "auth_user"."id", "auth_user"."password", "auth_user"."last_login", "auth_user"."is_superuser", "auth_user"."username", "auth_user"."first_name", "auth_user"."last_name", "auth_user"."email", "auth_user"."is_staff", "auth_user"."is_active", "auth_user"."date_joined" FROM "auth_user" WHERE "auth_user"."id" = 2; args=(2,)
+(0.001) SELECT "django_session"."session_key", "django_session"."session_data", "django_session"."expire_date" FROM "django_session" WHERE ("django_session"."expire_date" > '2020-07-24 12:10:28.916818' AND "django_session"."session_key" = 'dptgkxmzf50ofy58yud8z6n57gkzos48'); args=('2020-07-24 12:10:28.916818', 'dptgkxmzf50ofy58yud8z6n57gkzos48')
+(0.000) SELECT "auth_user"."id", "auth_user"."password", "auth_user"."last_login", "auth_user"."is_superuser", "auth_user"."username", "auth_user"."first_name", "auth_user"."last_name", "auth_user"."email", "auth_user"."is_staff", "auth_user"."is_active", "auth_user"."date_joined" FROM "auth_user" WHERE "auth_user"."id" = 2; args=(2,)
+(0.000) BEGIN; args=None
+(0.000) SELECT "shop_item"."id", "shop_item"."name", "shop_item"."desc", "shop_item"."price", "shop_item"."photo", "shop_item"."is_publish", "shop_item"."created_at", "shop_item"."update_at" FROM "shop_item" WHERE "shop_item"."id" = 2; args=(2,)
+(0.001) SELECT "django_session"."session_key", "django_session"."session_data", "django_session"."expire_date" FROM "django_session" WHERE ("django_session"."expire_date" > '2020-07-24 12:10:29.189092' AND "django_session"."session_key" = 'dptgkxmzf50ofy58yud8z6n57gkzos48'); args=('2020-07-24 12:10:29.189092', 'dptgkxmzf50ofy58yud8z6n57gkzos48')
+(0.000) SELECT "auth_user"."id", "auth_user"."password", "auth_user"."last_login", "auth_user"."is_superuser", "auth_user"."username", "auth_user"."first_name", "auth_user"."last_name", "auth_user"."email", "auth_user"."is_staff", "auth_user"."is_active", "auth_user"."date_joined" FROM "auth_user" WHERE "auth_user"."id" = 2; args=(2,)
+(0.000) SELECT "django_session"."session_key", "django_session"."session_data", "django_session"."expire_date" FROM "django_session" WHERE ("django_session"."expire_date" > '2020-07-24 12:10:34.482680' AND "django_session"."session_key" = 'dptgkxmzf50ofy58yud8z6n57gkzos48'); args=('2020-07-24 12:10:34.482680', 'dptgkxmzf50ofy58yud8z6n57gkzos48')
+(0.001) 
+            SELECT name, type FROM sqlite_master
+            WHERE type in ('table', 'view') AND NOT name='sqlite_sequence'
+            ORDER BY name; args=None
+(0.001) SELECT "django_migrations"."app", "django_migrations"."name" FROM "django_migrations"; args=()
+(0.001) SELECT "django_session"."session_key", "django_session"."session_data", "django_session"."expire_date" FROM "django_session" WHERE ("django_session"."expire_date" > '2020-07-24 12:25:58.440989' AND "django_session"."session_key" = 'dptgkxmzf50ofy58yud8z6n57gkzos48'); args=('2020-07-24 12:25:58.440989', 'dptgkxmzf50ofy58yud8z6n57gkzos48')
+(0.000) SELECT "django_session"."session_key", "django_session"."session_data", "django_session"."expire_date" FROM "django_session" WHERE ("django_session"."expire_date" > '2020-07-24 12:26:02.430358' AND "django_session"."session_key" = 'dptgkxmzf50ofy58yud8z6n57gkzos48'); args=('2020-07-24 12:26:02.430358', 'dptgkxmzf50ofy58yud8z6n57gkzos48')
+(0.000) SELECT "django_session"."session_key", "django_session"."session_data", "django_session"."expire_date" FROM "django_session" WHERE ("django_session"."expire_date" > '2020-07-24 12:26:09.270042' AND "django_session"."session_key" = 'dptgkxmzf50ofy58yud8z6n57gkzos48'); args=('2020-07-24 12:26:09.270042', 'dptgkxmzf50ofy58yud8z6n57gkzos48')
+(0.000) SELECT "auth_user"."id", "auth_user"."password", "auth_user"."last_login", "auth_user"."is_superuser", "auth_user"."username", "auth_user"."first_name", "auth_user"."last_name", "auth_user"."email", "auth_user"."is_staff", "auth_user"."is_active", "auth_user"."date_joined" FROM "auth_user" WHERE "auth_user"."id" = 2; args=(2,)
+(0.000) SELECT "django_admin_log"."id", "django_admin_log"."action_time", "django_admin_log"."user_id", "django_admin_log"."content_type_id", "django_admin_log"."object_id", "django_admin_log"."object_repr", "django_admin_log"."action_flag", "django_admin_log"."change_message", "auth_user"."id", "auth_user"."password", "auth_user"."last_login", "auth_user"."is_superuser", "auth_user"."username", "auth_user"."first_name", "auth_user"."last_name", "auth_user"."email", "auth_user"."is_staff", "auth_user"."is_active", "auth_user"."date_joined", "django_content_type"."id", "django_content_type"."app_label", "django_content_type"."model" FROM "django_admin_log" INNER JOIN "auth_user" ON ("django_admin_log"."user_id" = "auth_user"."id") LEFT OUTER JOIN "django_content_type" ON ("django_admin_log"."content_type_id" = "django_content_type"."id") WHERE "django_admin_log"."user_id" = 2 ORDER BY "django_admin_log"."action_time" DESC  LIMIT 10; args=(2,)
+(0.001) SELECT "django_session"."session_key", "django_session"."session_data", "django_session"."expire_date" FROM "django_session" WHERE ("django_session"."expire_date" > '2020-07-24 12:26:12.330861' AND "django_session"."session_key" = 'dptgkxmzf50ofy58yud8z6n57gkzos48'); args=('2020-07-24 12:26:12.330861', 'dptgkxmzf50ofy58yud8z6n57gkzos48')
+(0.000) SELECT "auth_user"."id", "auth_user"."password", "auth_user"."last_login", "auth_user"."is_superuser", "auth_user"."username", "auth_user"."first_name", "auth_user"."last_name", "auth_user"."email", "auth_user"."is_staff", "auth_user"."is_active", "auth_user"."date_joined" FROM "auth_user" WHERE "auth_user"."id" = 2; args=(2,)
+(0.000) SELECT COUNT(*) AS "__count" FROM "shop_item"; args=()
+(0.001) SELECT COUNT(*) AS "__count" FROM "shop_item"; args=()
+(0.000) SELECT "shop_item"."id", "shop_item"."name", "shop_item"."desc", "shop_item"."price", "shop_item"."photo", "shop_item"."is_publish", "shop_item"."created_at", "shop_item"."update_at" FROM "shop_item" ORDER BY "shop_item"."id" DESC; args=()
+(0.001) SELECT "django_session"."session_key", "django_session"."session_data", "django_session"."expire_date" FROM "django_session" WHERE ("django_session"."expire_date" > '2020-07-24 12:26:12.655989' AND "django_session"."session_key" = 'dptgkxmzf50ofy58yud8z6n57gkzos48'); args=('2020-07-24 12:26:12.655989', 'dptgkxmzf50ofy58yud8z6n57gkzos48')
+(0.001) SELECT "auth_user"."id", "auth_user"."password", "auth_user"."last_login", "auth_user"."is_superuser", "auth_user"."username", "auth_user"."first_name", "auth_user"."last_name", "auth_user"."email", "auth_user"."is_staff", "auth_user"."is_active", "auth_user"."date_joined" FROM "auth_user" WHERE "auth_user"."id" = 2; args=(2,)
+(0.000) SELECT "django_session"."session_key", "django_session"."session_data", "django_session"."expire_date" FROM "django_session" WHERE ("django_session"."expire_date" > '2020-07-24 12:26:14.077191' AND "django_session"."session_key" = 'dptgkxmzf50ofy58yud8z6n57gkzos48'); args=('2020-07-24 12:26:14.077191', 'dptgkxmzf50ofy58yud8z6n57gkzos48')
+(0.001) SELECT "auth_user"."id", "auth_user"."password", "auth_user"."last_login", "auth_user"."is_superuser", "auth_user"."username", "auth_user"."first_name", "auth_user"."last_name", "auth_user"."email", "auth_user"."is_staff", "auth_user"."is_active", "auth_user"."date_joined" FROM "auth_user" WHERE "auth_user"."id" = 2; args=(2,)
+(0.000) BEGIN; args=None
+(0.000) SELECT "shop_item"."id", "shop_item"."name", "shop_item"."desc", "shop_item"."price", "shop_item"."photo", "shop_item"."is_publish", "shop_item"."created_at", "shop_item"."update_at" FROM "shop_item" WHERE "shop_item"."id" = 2; args=(2,)
+(0.001) SELECT "django_content_type"."id", "django_content_type"."app_label", "django_content_type"."model" FROM "django_content_type" WHERE ("django_content_type"."app_label" = 'shop' AND "django_content_type"."model" = 'item'); args=('shop', 'item')
+(0.003) SELECT "django_session"."session_key", "django_session"."session_data", "django_session"."expire_date" FROM "django_session" WHERE ("django_session"."expire_date" > '2020-07-24 12:26:14.363426' AND "django_session"."session_key" = 'dptgkxmzf50ofy58yud8z6n57gkzos48'); args=('2020-07-24 12:26:14.363426', 'dptgkxmzf50ofy58yud8z6n57gkzos48')
+(0.000) SELECT "auth_user"."id", "auth_user"."password", "auth_user"."last_login", "auth_user"."is_superuser", "auth_user"."username", "auth_user"."first_name", "auth_user"."last_name", "auth_user"."email", "auth_user"."is_staff", "auth_user"."is_active", "auth_user"."date_joined" FROM "auth_user" WHERE "auth_user"."id" = 2; args=(2,)
+(0.001) SELECT "django_session"."session_key", "django_session"."session_data", "django_session"."expire_date" FROM "django_session" WHERE ("django_session"."expire_date" > '2020-07-24 12:26:18.937198' AND "django_session"."session_key" = 'dptgkxmzf50ofy58yud8z6n57gkzos48'); args=('2020-07-24 12:26:18.937198', 'dptgkxmzf50ofy58yud8z6n57gkzos48')
+(0.000) SELECT "auth_user"."id", "auth_user"."password", "auth_user"."last_login", "auth_user"."is_superuser", "auth_user"."username", "auth_user"."first_name", "auth_user"."last_name", "auth_user"."email", "auth_user"."is_staff", "auth_user"."is_active", "auth_user"."date_joined" FROM "auth_user" WHERE "auth_user"."id" = 2; args=(2,)
+(0.000) BEGIN; args=None
+(0.000) SELECT "shop_item"."id", "shop_item"."name", "shop_item"."desc", "shop_item"."price", "shop_item"."photo", "shop_item"."is_publish", "shop_item"."created_at", "shop_item"."update_at" FROM "shop_item" WHERE "shop_item"."id" = 2; args=(2,)
+(0.008) UPDATE "shop_item" SET "name" = 'Æ÷´¢', "desc" = 'Æ÷´¢', "price" = 0, "photo" = '40/90/d8a4c5274d8cbe3f1892122dd8b0.png', "is_publish" = 1, "created_at" = '2020-07-24 12:10:20.226945', "update_at" = '2020-07-24 12:26:19.163594' WHERE "shop_item"."id" = 2; args=('Æ÷´¢', 'Æ÷´¢', 0, '40/90/d8a4c5274d8cbe3f1892122dd8b0.png', True, '2020-07-24 12:10:20.226945', '2020-07-24 12:26:19.163594', 2)
+(0.000) INSERT INTO "django_admin_log" ("action_time", "user_id", "content_type_id", "object_id", "object_repr", "action_flag", "change_message") VALUES ('2020-07-24 12:26:19.201493', 2, 8, '2', 'Æ÷´¢', 2, '[{"changed": {"fields": ["photo"]}}]'); args=['2020-07-24 12:26:19.201493', 2, 8, '2', 'Æ÷´¢', 2, '[{"changed": {"fields": ["photo"]}}]']
+(0.001) SELECT "django_session"."session_key", "django_session"."session_data", "django_session"."expire_date" FROM "django_session" WHERE ("django_session"."expire_date" > '2020-07-24 12:26:19.247405' AND "django_session"."session_key" = 'dptgkxmzf50ofy58yud8z6n57gkzos48'); args=('2020-07-24 12:26:19.247405', 'dptgkxmzf50ofy58yud8z6n57gkzos48')
+(0.001) SELECT "auth_user"."id", "auth_user"."password", "auth_user"."last_login", "auth_user"."is_superuser", "auth_user"."username", "auth_user"."first_name", "auth_user"."last_name", "auth_user"."email", "auth_user"."is_staff", "auth_user"."is_active", "auth_user"."date_joined" FROM "auth_user" WHERE "auth_user"."id" = 2; args=(2,)
+(0.000) SELECT COUNT(*) AS "__count" FROM "shop_item"; args=()
+(0.000) SELECT COUNT(*) AS "__count" FROM "shop_item"; args=()
+(0.000) SELECT "shop_item"."id", "shop_item"."name", "shop_item"."desc", "shop_item"."price", "shop_item"."photo", "shop_item"."is_publish", "shop_item"."created_at", "shop_item"."update_at" FROM "shop_item" ORDER BY "shop_item"."id" DESC; args=()
+(0.001) SELECT "django_session"."session_key", "django_session"."session_data", "django_session"."expire_date" FROM "django_session" WHERE ("django_session"."expire_date" > '2020-07-24 12:26:19.580479' AND "django_session"."session_key" = 'dptgkxmzf50ofy58yud8z6n57gkzos48'); args=('2020-07-24 12:26:19.580479', 'dptgkxmzf50ofy58yud8z6n57gkzos48')
+(0.000) SELECT "auth_user"."id", "auth_user"."password", "auth_user"."last_login", "auth_user"."is_superuser", "auth_user"."username", "auth_user"."first_name", "auth_user"."last_name", "auth_user"."email", "auth_user"."is_staff", "auth_user"."is_active", "auth_user"."date_joined" FROM "auth_user" WHERE "auth_user"."id" = 2; args=(2,)
+(0.001) SELECT "django_session"."session_key", "django_session"."session_data", "django_session"."expire_date" FROM "django_session" WHERE ("django_session"."expire_date" > '2020-07-24 12:26:20.796229' AND "django_session"."session_key" = 'dptgkxmzf50ofy58yud8z6n57gkzos48'); args=('2020-07-24 12:26:20.796229', 'dptgkxmzf50ofy58yud8z6n57gkzos48')
+(0.001) SELECT "auth_user"."id", "auth_user"."password", "auth_user"."last_login", "auth_user"."is_superuser", "auth_user"."username", "auth_user"."first_name", "auth_user"."last_name", "auth_user"."email", "auth_user"."is_staff", "auth_user"."is_active", "auth_user"."date_joined" FROM "auth_user" WHERE "auth_user"."id" = 2; args=(2,)
+(0.000) BEGIN; args=None
+(0.001) SELECT "shop_item"."id", "shop_item"."name", "shop_item"."desc", "shop_item"."price", "shop_item"."photo", "shop_item"."is_publish", "shop_item"."created_at", "shop_item"."update_at" FROM "shop_item" WHERE "shop_item"."id" = 2; args=(2,)
+(0.001) SELECT "django_session"."session_key", "django_session"."session_data", "django_session"."expire_date" FROM "django_session" WHERE ("django_session"."expire_date" > '2020-07-24 12:26:21.083461' AND "django_session"."session_key" = 'dptgkxmzf50ofy58yud8z6n57gkzos48'); args=('2020-07-24 12:26:21.083461', 'dptgkxmzf50ofy58yud8z6n57gkzos48')
+(0.001) SELECT "auth_user"."id", "auth_user"."password", "auth_user"."last_login", "auth_user"."is_superuser", "auth_user"."username", "auth_user"."first_name", "auth_user"."last_name", "auth_user"."email", "auth_user"."is_staff", "auth_user"."is_active", "auth_user"."date_joined" FROM "auth_user" WHERE "auth_user"."id" = 2; args=(2,)
+(0.001) 
+            SELECT name, type FROM sqlite_master
+            WHERE type in ('table', 'view') AND NOT name='sqlite_sequence'
+            ORDER BY name; args=None
+(0.000) SELECT "django_migrations"."app", "django_migrations"."name" FROM "django_migrations"; args=()
+(0.001) 
+            SELECT name, type FROM sqlite_master
+            WHERE type in ('table', 'view') AND NOT name='sqlite_sequence'
+            ORDER BY name; args=None
+(0.000) SELECT "django_migrations"."app", "django_migrations"."name" FROM "django_migrations"; args=()
+(0.001) 
+            SELECT name, type FROM sqlite_master
+            WHERE type in ('table', 'view') AND NOT name='sqlite_sequence'
+            ORDER BY name; args=None
+(0.000) SELECT "django_migrations"."app", "django_migrations"."name" FROM "django_migrations"; args=()
+(0.001) SELECT "django_session"."session_key", "django_session"."session_data", "django_session"."expire_date" FROM "django_session" WHERE ("django_session"."expire_date" > '2020-07-24 12:29:15.404518' AND "django_session"."session_key" = 'dptgkxmzf50ofy58yud8z6n57gkzos48'); args=('2020-07-24 12:29:15.404518', 'dptgkxmzf50ofy58yud8z6n57gkzos48')
+(0.000) SELECT "auth_user"."id", "auth_user"."password", "auth_user"."last_login", "auth_user"."is_superuser", "auth_user"."username", "auth_user"."first_name", "auth_user"."last_name", "auth_user"."email", "auth_user"."is_staff", "auth_user"."is_active", "auth_user"."date_joined" FROM "auth_user" WHERE "auth_user"."id" = 2; args=(2,)
+(0.000) BEGIN; args=None
+(0.000) SELECT "shop_item"."id", "shop_item"."name", "shop_item"."desc", "shop_item"."price", "shop_item"."photo", "shop_item"."is_publish", "shop_item"."created_at", "shop_item"."update_at" FROM "shop_item" WHERE "shop_item"."id" = 2; args=(2,)
+(0.000) SELECT "django_content_type"."id", "django_content_type"."app_label", "django_content_type"."model" FROM "django_content_type" WHERE ("django_content_type"."app_label" = 'shop' AND "django_content_type"."model" = 'item'); args=('shop', 'item')
+(0.001) SELECT "django_session"."session_key", "django_session"."session_data", "django_session"."expire_date" FROM "django_session" WHERE ("django_session"."expire_date" > '2020-07-24 12:29:21.327523' AND "django_session"."session_key" = 'dptgkxmzf50ofy58yud8z6n57gkzos48'); args=('2020-07-24 12:29:21.327523', 'dptgkxmzf50ofy58yud8z6n57gkzos48')
+(0.000) SELECT "auth_user"."id", "auth_user"."password", "auth_user"."last_login", "auth_user"."is_superuser", "auth_user"."username", "auth_user"."first_name", "auth_user"."last_name", "auth_user"."email", "auth_user"."is_staff", "auth_user"."is_active", "auth_user"."date_joined" FROM "auth_user" WHERE "auth_user"."id" = 2; args=(2,)
+(0.001) SELECT "django_session"."session_key", "django_session"."session_data", "django_session"."expire_date" FROM "django_session" WHERE ("django_session"."expire_date" > '2020-07-24 12:29:28.143508' AND "django_session"."session_key" = 'dptgkxmzf50ofy58yud8z6n57gkzos48'); args=('2020-07-24 12:29:28.143508', 'dptgkxmzf50ofy58yud8z6n57gkzos48')
+(0.001) SELECT "auth_user"."id", "auth_user"."password", "auth_user"."last_login", "auth_user"."is_superuser", "auth_user"."username", "auth_user"."first_name", "auth_user"."last_name", "auth_user"."email", "auth_user"."is_staff", "auth_user"."is_active", "auth_user"."date_joined" FROM "auth_user" WHERE "auth_user"."id" = 2; args=(2,)
+(0.000) SELECT "shop_item"."id", "shop_item"."name", "shop_item"."desc", "shop_item"."price", "shop_item"."photo", "shop_item"."is_publish", "shop_item"."created_at", "shop_item"."update_at" FROM "shop_item"; args=()
+(0.001) SELECT "django_session"."session_key", "django_session"."session_data", "django_session"."expire_date" FROM "django_session" WHERE ("django_session"."expire_date" > '2020-07-24 12:31:47.574308' AND "django_session"."session_key" = 'dptgkxmzf50ofy58yud8z6n57gkzos48'); args=('2020-07-24 12:31:47.574308', 'dptgkxmzf50ofy58yud8z6n57gkzos48')
+(0.000) SELECT "auth_user"."id", "auth_user"."password", "auth_user"."last_login", "auth_user"."is_superuser", "auth_user"."username", "auth_user"."first_name", "auth_user"."last_name", "auth_user"."email", "auth_user"."is_staff", "auth_user"."is_active", "auth_user"."date_joined" FROM "auth_user" WHERE "auth_user"."id" = 2; args=(2,)
+(0.001) SELECT "shop_item"."id", "shop_item"."name", "shop_item"."desc", "shop_item"."price", "shop_item"."photo", "shop_item"."is_publish", "shop_item"."created_at", "shop_item"."update_at" FROM "shop_item"; args=()
+(0.001) SELECT "shop_item"."id", "shop_item"."name", "shop_item"."desc", "shop_item"."price", "shop_item"."photo", "shop_item"."is_publish", "shop_item"."created_at", "shop_item"."update_at" FROM "shop_item" WHERE "shop_item"."id" = 2; args=(2,)
+(0.001) SELECT "django_session"."session_key", "django_session"."session_data", "django_session"."expire_date" FROM "django_session" WHERE ("django_session"."expire_date" > '2020-07-24 12:31:48.325150' AND "django_session"."session_key" = 'dptgkxmzf50ofy58yud8z6n57gkzos48'); args=('2020-07-24 12:31:48.325150', 'dptgkxmzf50ofy58yud8z6n57gkzos48')
+(0.000) SELECT "auth_user"."id", "auth_user"."password", "auth_user"."last_login", "auth_user"."is_superuser", "auth_user"."username", "auth_user"."first_name", "auth_user"."last_name", "auth_user"."email", "auth_user"."is_staff", "auth_user"."is_active", "auth_user"."date_joined" FROM "auth_user" WHERE "auth_user"."id" = 2; args=(2,)
+(0.001) SELECT "django_session"."session_key", "django_session"."session_data", "django_session"."expire_date" FROM "django_session" WHERE ("django_session"."expire_date" > '2020-07-24 12:32:59.701793' AND "django_session"."session_key" = 'dptgkxmzf50ofy58yud8z6n57gkzos48'); args=('2020-07-24 12:32:59.701793', 'dptgkxmzf50ofy58yud8z6n57gkzos48')
+(0.000) SELECT "auth_user"."id", "auth_user"."password", "auth_user"."last_login", "auth_user"."is_superuser", "auth_user"."username", "auth_user"."first_name", "auth_user"."last_name", "auth_user"."email", "auth_user"."is_staff", "auth_user"."is_active", "auth_user"."date_joined" FROM "auth_user" WHERE "auth_user"."id" = 2; args=(2,)
+(0.001) SELECT "shop_item"."id", "shop_item"."name", "shop_item"."desc", "shop_item"."price", "shop_item"."photo", "shop_item"."is_publish", "shop_item"."created_at", "shop_item"."update_at" FROM "shop_item"; args=()
+(0.001) SELECT "shop_item"."id", "shop_item"."name", "shop_item"."desc", "shop_item"."price", "shop_item"."photo", "shop_item"."is_publish", "shop_item"."created_at", "shop_item"."update_at" FROM "shop_item" WHERE "shop_item"."id" = 2; args=(2,)
+(0.000) SELECT "django_session"."session_key", "django_session"."session_data", "django_session"."expire_date" FROM "django_session" WHERE ("django_session"."expire_date" > '2020-07-24 12:33:00.343113' AND "django_session"."session_key" = 'dptgkxmzf50ofy58yud8z6n57gkzos48'); args=('2020-07-24 12:33:00.343113', 'dptgkxmzf50ofy58yud8z6n57gkzos48')
+(0.000) SELECT "auth_user"."id", "auth_user"."password", "auth_user"."last_login", "auth_user"."is_superuser", "auth_user"."username", "auth_user"."first_name", "auth_user"."last_name", "auth_user"."email", "auth_user"."is_staff", "auth_user"."is_active", "auth_user"."date_joined" FROM "auth_user" WHERE "auth_user"."id" = 2; args=(2,)
