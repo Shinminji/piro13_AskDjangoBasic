@@ -1,0 +1,23 @@
+{% extends "shop/layout.html" %}
+{% load humanize %}
+
+{% block content %}
+    <h2>{{ item.name }}</h2>
+
+    가격: {{ item.price|intcomma }}원
+
+    {% if item.desc %}
+        <p>
+            {{ item.desc }}
+        </p>
+    {% endif %}
+
+    <hr/>
+
+    <a href="/shop/">목록</a>
+{% endblock %}
+
+<!--상속 받고 나면 중복되는 부분 날리기-->
+
+
+
